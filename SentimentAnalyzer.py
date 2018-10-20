@@ -114,10 +114,10 @@ def main(query):
     for tweet in ntweets[:10]:
         print(tweet['text'])
 
-    all_tweets = []
+    neutral_negative_tweets = []
     tweets = [x for x in tweets if x not in ptweets]
-    all_tweets.extend(tweets)
-    return all_tweets
+    neutral_negative_tweets.extend(tweets)
+    return neutral_negative_tweets
 
 
 
