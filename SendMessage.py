@@ -1,22 +1,19 @@
 from time import time
-import os
 import tweepy
+import SentimentAnalyzer
 from ConfigureMessage import generate_dm_text
 from SentimentAnalyzer import main
 
-consumer_token = os.environ['n4zRm3xuVoYoBHDLbSSqCxlII']
-consumer_secret = os.environ['i2bxYM53rVNv0NFnO4iALdUYUDXHSEp9JARjpSu6290B5W6BLj']
-access_token = os.environ['3265727682-sWioD71Vv1zJie1KCERyHZWgzCdDsGAy3lzdLJA']
-access_token_secret = os.environ['Ir9vMlPyiJwafcqXOiRJgtdWpev2VU3rI0Z2MWXlJ79SV']
 
-auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
+
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
 
 api = tweepy.API(auth)
 
 neutral_negative_tweets = []
 neutral_negative_tweets = main('#depressed')
 
-def make_name_array(tweets):
+def reach_out(tweets):
     names = []
     for x in tweets:
         test = x.split()[1]
@@ -26,6 +23,8 @@ def make_name_array(tweets):
     ids = []
     for i in names:
         ids.append(get_identifier(i))
+    send_message(ids)
+    return ids
 
 def send_message (ids):
     for i in ids:
@@ -48,3 +47,5 @@ def send_direct_message(to_userid):
     first_name = get_username(to_userid).split(' ')[0]
     dm_text = generate_dm_text(first_name)
     api.send_direct_message(to_userid, text=dm_text)
+
+print(reach_out(neutral_negative_tweets))
