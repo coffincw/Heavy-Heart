@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="PYTHON_MODULE" version="4">
   <component name="NewModuleRootManager">
+<<<<<<< HEAD
     <content url="file://$MODULE_DIR$" />
+    <orderEntry type="jdk" jdkName="Python 3.6.3 (C:\Users\ccoffin\AppData\Local\Programs\Python\Python36-32\python.exe)" jdkType="Python SDK" />
+=======
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/venv" />
+    </content>
     <orderEntry type="jdk" jdkName="Python 3.6 (hold)" jdkType="Python SDK" />
+>>>>>>> 57ceb9daf1a241f98bd2fd2f926e3ab784f3f4c1
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TestRunnerService">

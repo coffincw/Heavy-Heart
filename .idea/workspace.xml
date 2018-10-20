@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30bbc429-8fd0-44f6-9e68-bc35d77ab99d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ConfigureMessage.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SendMessage.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="30bbc429-8fd0-44f6-9e68-bc35d77ab99d" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +15,10 @@
         <entry file="file://$PROJECT_DIR$/SentimentAnalyzer.py">
           <provider selected="true" editor-type-id="text-editor">
 <<<<<<< HEAD
+            <state relative-caret-position="191">
+              <caret line="100" column="5" lean-forward="false" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+=======
+<<<<<<< HEAD
             <state relative-caret-position="711">
               <caret line="126" column="22" lean-forward="true" selection-start-line="126" selection-start-column="22" selection-end-line="126" selection-end-column="22" />
               <folding>
@@ -28,6 +27,7 @@
 =======
             <state relative-caret-position="-1180">
               <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
+>>>>>>> 465eef7c9d3726aa799c49f997cf763cbe9cfd1e
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -247,9 +247,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SentimentAnalyzer.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+        <state relative-caret-position="191">
+          <caret line="100" column="5" lean-forward="false" selection-start-line="100" selection-start-column="5" selection-end-line="100" selection-end-column="5" />
+=======
         <state relative-caret-position="-1180">
           <caret line="22" column="12" lean-forward="false" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="12" />
 >>>>>>> a1cf0937b085ef4ab41e5110b8bc0e93256ec64a
+>>>>>>> 465eef7c9d3726aa799c49f997cf763cbe9cfd1e
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

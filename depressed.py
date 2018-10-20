@@ -1,6 +1,9 @@
 """
 before running, set the map of the grouped reviews to their respective dictionaries.
 """
+from math import log
+
+
 def is_depressed(review):
   if(is_depressed.counter==0):#define probabilities
       is_depressed.lenP = 0
