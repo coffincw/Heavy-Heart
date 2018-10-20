@@ -33,6 +33,12 @@ def is_depressed(review):
   probPos = float(is_depressed.lenP)/float(is_depressed.lenP+is_depressed.lenN)
   probNeg = float(is_depressed.lenN)/float(is_depressed.lenP+is_depressed.lenN)
   for word in review:
-      logProductN += log(float(is_depressed.countMapC.get(word,1)))
-      logProductP += log(float(is_depressed.countMapD.get(word,1)))
-  return logProductP-log(float(is_depressed.lenP))>logProductN-log(float(is_depressed.lenN))
+      logProductN += math.log(float(is_depressed.countMapC.get(word,1)))
+      logProductP += math.log(float(is_depressed.countMapD.get(word,1)))
+  return logProductP-math.log(float(is_depressed.lenP))>logProductN-math.log(float(is_depressed.lenN))
+
+is_depressed.counter = 0
+is_depressed.lenP = 0
+is_depressed.lenN = 0
+is_depressed.countMapD = {}
+is_depressed.countMapC = {}

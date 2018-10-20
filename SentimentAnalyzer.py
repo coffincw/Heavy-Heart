@@ -3,81 +3,89 @@ import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
 
-# keys and tokens from the Twitter Dev Console
-consumer_key = 'n4zRm3xuVoYoBHDLbSSqCxlII'
-consumer_secret = 'i2bxYM53rVNv0NFnO4iALdUYUDXHSEp9JARjpSu6290B5W6BLj'
-access_token = '3265727682-sWioD71Vv1zJie1KCERyHZWgzCdDsGAy3lzdLJA'
-access_token_secret = 'Ir9vMlPyiJwafcqXOiRJgtdWpev2VU3rI0Z2MWXlJ79SV'
 
-# attempt authentication
-try:
-    # create OAuthHandler object
-    self.auth = OAuthHandler(consumer_key, consumer_secret)
-    # set access token and secret
-    self.auth.set_access_token(access_token, access_token_secret)
-    # create tweepy API object to fetch tweets
-    self.api = tweepy.API(self.auth)
-except:
-    print("Error: Authentication Failed")
-
-
-def clean_tweet(self, tweet):
+class TwitterClient(object):
     """
-    Utility function to clean tweet text by removing links, special characters
-    using simple regex statements.
-    """
-    return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t]) |(\w+:\//\S+)", " ", tweet).split())
+	Generic Twitter Class for sentiment analysis.
+	yes
+	"""
 
+    def __init__(self):
+        """
+		Class constructor or initialization method.
+		"""
+        # keys and tokens from the Twitter Dev Console
+        consumer_key = 'n4zRm3xuVoYoBHDLbSSqCxlII'
+        consumer_secret = 'i2bxYM53rVNv0NFnO4iALdUYUDXHSEp9JARjpSu6290B5W6BLj'
+        access_token = '3265727682-sWioD71Vv1zJie1KCERyHZWgzCdDsGAy3lzdLJA'
+        access_token_secret = 'Ir9vMlPyiJwafcqXOiRJgtdWpev2VU3rI0Z2MWXlJ79SV'
 
-def get_tweet_sentiment(self, tweet):
-    """
-    Utility function to classify sentiment of passed tweet
-    using textblob's sentiment method
-    """
-    # create TextBlob object of passed tweet text
-    analysis = TextBlob(self.clean_tweet(tweet))
-    # set sentiment
-    if analysis.sentiment.polarity > 0:
-        return 'positive'
-    elif analysis.sentiment.polarity == 0:
-        return 'neutral'
-    else:
-        return 'negative'
+        # attempt authentication
+        try:
+            # create OAuthHandler object
+            self.auth = OAuthHandler(consumer_key, consumer_secret)
+            # set access token and secret
+            self.auth.set_access_token(access_token, access_token_secret)
+            # create tweepy API object to fetch tweets
+            self.api = tweepy.API(self.auth)
+        except:
+            print("Error: Authentication Failed")
 
+    def clean_tweet(self, tweet):
+        """
+		Utility function to clean tweet text by removing links, special characters
+		using simple regex statements.
+		"""
+        return ' '.join(re.sub("(@[A-Za-z0-9]+)|([^0-9A-Za-z \t]) |(\w+:\//\S+)", " ", tweet).split())
 
-def get_tweets(self, query, count=10):
-    """
-    Main function to fetch tweets and parse them.
-    """
-    # empty list to store parsed tweets
-    tweets = []
+    def get_tweet_sentiment(self, tweet):
+        """
+        Utility function to classify sentiment of passed tweet
+		using textblob's sentiment method
+		"""
+        # create TextBlob object of passed tweet text
+        analysis = TextBlob(self.clean_tweet(tweet))
+        # set sentiment
+        if analysis.sentiment.polarity > 0:
+            return 'positive'
+        elif analysis.sentiment.polarity == 0:
+            return 'neutral'
+        else:
+            return 'negative'
 
-    try:
-        # call twitter api to fetch tweets
-        fetched_tweets = self.api.search(q=query, count=count)
+    def get_tweets(self, query, count=10):
+        """
+		Main function to fetch tweets and parse them.
+		"""
+        # empty list to store parsed tweets
+        tweets = []
 
-        # parsing tweets one by one
-        for tweet in fetched_tweets:
-            # empty dictionary to store required params of a tweet
-            parsed_tweet = {'text': tweet.text, 'sentiment': self.get_tweet_sentiment(tweet.text)}
+        try:
+            # call twitter api to fetch tweets
+            fetched_tweets = self.api.search(q=query, count=count)
 
-            # saving text of tweet
-            # saving sentiment of tweet
+            # parsing tweets one by one
+            for tweet in fetched_tweets:
+                # empty dictionary to store required params of a tweet
+                parsed_tweet = {'text': tweet.text, 'sentiment': self.get_tweet_sentiment(tweet.text)}
 
-            # appending parsed tweet to tweets list
-            if tweet.retweet_count > 0:
-                # if tweet has retweets, ensure that it is appended only once
-                if parsed_tweet not in tweets:
+                # saving text of tweet
+                # saving sentiment of tweet
+
+                # appending parsed tweet to tweets list
+                if tweet.retweet_count > 0:
+                    # if tweet has retweets, ensure that it is appended only once
+                    if parsed_tweet not in tweets:
+                        tweets.append(parsed_tweet)
+                else:
                     tweets.append(parsed_tweet)
-            else:
-                tweets.append(parsed_tweet)
 
-            # return parsed tweets
-        return tweets
+                # return parsed tweets
+            return tweets
 
-    except tweepy.TweepError as e:
-        # print error (if any)
-        print("Error : " + str(e))
+        except tweepy.TweepError as e:
+            # print error (if any)
+            print("Error : " + str(e))
 
 
 def main(query):
@@ -95,7 +103,7 @@ def main(query):
     # percentage of negative tweets
     print("Negative tweets percentage: {} %".format(100 * len(ntweets) / len(tweets)))
     # percentage of neutral tweets
-    print("Neutral tweets percentage: {} % \ ".format(100 * (len(tweets) - len(ntweets) - len(ptweets)) / len(tweets)))
+    print("Neutral tweets percentage: {} % \ ".format(100 * (len(tweets)-len(ntweets)-len(ptweets)) / len(tweets)))
 
     # printing first 5 positive tweets
     print("\n\nPositive tweets:")
@@ -111,6 +119,8 @@ def main(query):
     tweets = [x for x in tweets if x not in ptweets]
     neutral_negative_tweets.extend(tweets)
     return neutral_negative_tweets
+
+
 
 
 if __name__ == "__main__":
