@@ -2,6 +2,7 @@ import re
 import tweepy
 from tweepy import OAuthHandler
 from textblob import TextBlob
+import pandas
 
 
 class TwitterClient(object):
@@ -115,10 +116,15 @@ def main(query):
     for tweet in ntweets[:10]:
         print(tweet['text'])
 
+    return ntweets
+
+    '''
     neutral_negative_tweets = []
     tweets = [x for x in tweets if x not in ptweets]
     neutral_negative_tweets.extend(tweets)
-    return neutral_negative_tweets
+    return neutral_negative_tweets'''
+
+
 
 
 
