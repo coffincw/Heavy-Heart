@@ -4,6 +4,14 @@ import SentimentAnalyzer
 from tweepy import OAuthHandler
 from textblob import TextBlob
 
+'''
+
+working on a class that should, in theory, return the full timeline of any user (used donald trump
+in this case im lazy and that's what the example was using)
+having problems with getTimeline() and getTraining()
+
+'''
+
 class GetTimeline(object):
   def __init__(self, *args, **kwargs):
     consumer_key = 'n4zRm3xuVoYoBHDLbSSqCxlII'
