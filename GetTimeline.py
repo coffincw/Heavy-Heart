@@ -31,7 +31,7 @@ class GetTimeline(object):
     return super().__init__(*args, **kwargs)
 
   @staticmethod
-  def getTraining():
+  def getTraining(username):
     tweets = SentimentAnalyzer.main("#depressed")
     anxiety = SentimentAnalyzer.main("#anxiety")
     tweets.extend([x for x in anxiety if x not in tweets])
@@ -39,21 +39,20 @@ class GetTimeline(object):
     for x in tweets:
       training.append(list(x.values())[0])
 
-    xyz =  getTimeline("@realDonaldTrump")
+    xyz =  getTimeline(username)
     for y in xyz:
        print(y)
 
-  @staticmethod
-  def getTimeline(username):
-    timeline = []
-    api = GetTimeline().api
-    for status in tweepy.Cursor(api.user_timeline, screen_name = username,).items():
-      timeline.append(status)
 
-    return timeline
+def getTimeline(username):
+  timeline = []
+  api = GetTimeline().api
+  for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 100).items():
+    timeline.append(status.text)
+  return timeline
 
 def main():
-  GetTimeline().getTraining()
+  GetTimeline().getTraining("@urmumlol")
 
 
 if __name__ == "__main__":
