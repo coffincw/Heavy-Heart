@@ -8,7 +8,7 @@ def is_depressed(review):
       is_depressed.countMapD = {}#depressed revieww 
       is_depressed.countMapC = {}#Control review
       print("defining probabilities, this will take a while")
-      for depressedReview in train_pos:
+      for depressedReview in train_depressed:
           for word in depressedReview:
               is_depressed.lenP+=1
               if(is_depressed.countMapD.__contains__(word)):
@@ -16,7 +16,7 @@ def is_depressed(review):
                   is_depressed.countMapD.update(tempDic)
               else:
                   is_depressed.countMapD.update({word: 1})
-      for controlReview in train_neg:
+      for controlReview in train_control:
           for word in controlReview:
               is_depressed.lenN+=1
               if (is_depressed.countMapC.__contains__(word)):
