@@ -13,6 +13,7 @@ auth = tweepy.OAuthHandler(consumer_token, consumer_secret)
 
 api = tweepy.API(auth)
 
+neutral_negative_tweets = []
 neutral_negative_tweets = main('#depressed')
 
 def make_name_array(tweets):
