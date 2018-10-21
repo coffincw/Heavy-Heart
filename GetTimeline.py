@@ -89,8 +89,7 @@ def getALotofTweets():
 
 def main():
   #GetTimeline().getTraining("@iamdevloper")
-  #generateRandUsers()
-  getALotofTweets()
+  generateRandUsers()
 
 
 if __name__ == "__main__":
