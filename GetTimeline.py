@@ -54,7 +54,7 @@ class GetTimeline(object):
 def getTimeline(username):
   timeline = []
   api = GetTimeline().api
-  for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 100).items():
+  for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 20, wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items():
     timeline.append(status.user.screen_name)
   return timeline
 
@@ -73,12 +73,13 @@ def generateRandUsers():
           f.write(x+"\n")
   print(len(users))
 
-def makeTxtGreatAgain():
+def getALotofTweets():
   lines = [line.rstrip('\n') for line in open('text.txt')]
-  lines = set(lines)
-  f = open("text.txt", "w")
+  f = open("tweets.txt", "x")
   for x in lines:
-    f.write(x+"\n")
+    f.write(x+": \n")
+    f.write(getTimeline(x))
+    f.write("############")
 
 
 
@@ -86,7 +87,7 @@ def makeTxtGreatAgain():
 def main():
   #GetTimeline().getTraining("@iamdevloper")
   #generateRandUsers()
-  makeTxtGreatAgain()
+  getALotofTweets()
 
 
 if __name__ == "__main__":
