@@ -38,8 +38,8 @@ class GetTimeline(object):
 
   @staticmethod
   def getTraining(username):
-    tweets = SentimentAnalyzer.main("#depressed")
-    anxiety = SentimentAnalyzer.main("#anxiety")
+    tweets = SentimentAnalyzer.main("e%20")
+    anxiety = SentimentAnalyzer.main("s%20")
     tweets.extend([x for x in anxiety if x not in tweets])
     training = []
     for x in tweets:
@@ -55,11 +55,32 @@ def getTimeline(username):
   timeline = []
   api = GetTimeline().api
   for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 100).items():
-    timeline.append(status.text)
+    timeline.append(status.user.screen_name)
   return timeline
 
+def generateRandUsers():
+  alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
+              'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  users = []
+  api = GetTimeline().api
+  for a in alphabet:
+    s = a+"%20"
+    tweets2 = tweepy.Cursor(api.search, q=s, count = 100, lang = 'en', wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items()
+    for x in tweets2:
+      if(x.user.screen_name not in users):
+        users.append(x.user.screen_name)
+  print(len(users))
+  f = open("text.txt", "w")
+  for x in users:
+    f.write(x+"\n")
+
+
+
+
+
 def main():
-  GetTimeline().getTraining("@urmumlol")
+  #GetTimeline().getTraining("@iamdevloper")
+  generateRandUsers()
 
 
 if __name__ == "__main__":
