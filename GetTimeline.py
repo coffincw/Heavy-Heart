@@ -59,28 +59,34 @@ def getTimeline(username):
   return timeline
 
 def generateRandUsers():
-  alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-              'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+  alphabet = ['t', 'a', 'i', 's','o', 'c', 'm', 'f', 'p', 'w']
   users = []
   api = GetTimeline().api
+  f = open("text.txt", "w")
   for a in alphabet:
-    s = a+"%20"
-    tweets2 = tweepy.Cursor(api.search, q=s, count = 100, lang = 'en', wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items()
+    s = "%20"+a
+    tweets2 = tweepy.Cursor(api.search, q=s, count = 20, lang = 'en', wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items()
     for x in tweets2:
       if(x.user.screen_name not in users):
         users.append(x.user.screen_name)
+        for x in users:
+          f.write(x+"\n")
   print(len(users))
-  f = open("text.txt", "w")
-  for x in users:
-    f.write(x+"\n")
 
+def makeTxtGreatAgain():
+  lines = [line.rstrip('\n') for line in open('text.txt')]
+  lines = set(lines)
+  f = open("text.txt", "w")
+  for x in lines:
+    f.write(x+"\n")
 
 
 
 
 def main():
   #GetTimeline().getTraining("@iamdevloper")
-  generateRandUsers()
+  #generateRandUsers()
+  makeTxtGreatAgain()
 
 
 if __name__ == "__main__":
