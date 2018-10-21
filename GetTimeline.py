@@ -3,6 +3,7 @@ import tweepy
 import SentimentAnalyzer
 from tweepy import OAuthHandler
 from textblob import TextBlob
+import json
 
 '''
 
@@ -55,7 +56,7 @@ def getTimeline(username):
   timeline = []
   api = GetTimeline().api
   for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 20, wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items():
-    timeline.append(status.user.screen_name)
+    timeline.append(status.text)
   return timeline
 
 def generateRandUsers():
@@ -75,11 +76,13 @@ def generateRandUsers():
 
 def getALotofTweets():
   lines = [line.rstrip('\n') for line in open('text.txt')]
-  f = open("tweets.txt", "x")
+  f = open("data.json", "x")
   for x in lines:
-    f.write(x+": \n")
-    f.write(getTimeline(x))
-    f.write("############")
+    entry = {}
+    tweets = getTimeline("@"+x)
+    entry = {"username": x, "tweets": tweets}
+    data_store = json.dumps(entry)
+    f.write(data_store)
 
 
 
