@@ -38,8 +38,8 @@ class GetTimeline(object):
 
   @staticmethod
   def getTraining(username):
-    tweets = SentimentAnalyzer.main("#depressed")
-    anxiety = SentimentAnalyzer.main("#anxiety")
+    tweets = SentimentAnalyzer.main("e%20")
+    anxiety = SentimentAnalyzer.main("s%20")
     tweets.extend([x for x in anxiety if x not in tweets])
     training = []
     for x in tweets:
@@ -54,12 +54,40 @@ class GetTimeline(object):
 def getTimeline(username):
   timeline = []
   api = GetTimeline().api
-  for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 100).items():
-    timeline.append(status.text)
+  for status in tweepy.Cursor(api.user_timeline, screen_name = username, count = 20, wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items():
+    timeline.append(status.user.screen_name)
   return timeline
 
+def generateRandUsers():
+  alphabet = ['t', 'a', 'i', 's','o', 'c', 'm', 'f', 'p', 'w']
+  users = []
+  api = GetTimeline().api
+  f = open("text.txt", "w")
+  for a in alphabet:
+    s = "%20"+a
+    tweets2 = tweepy.Cursor(api.search, q=s, count = 20, lang = 'en', wait_on_rate_limit = True, wait_on_rate_limit_notify = True).items()
+    for x in tweets2:
+      if(x.user.screen_name not in users):
+        users.append(x.user.screen_name)
+        for x in users:
+          f.write(x+"\n")
+  print(len(users))
+
+def getALotofTweets():
+  lines = [line.rstrip('\n') for line in open('text.txt')]
+  f = open("tweets.txt", "x")
+  for x in lines:
+    f.write(x+": \n")
+    f.write(getTimeline(x))
+    f.write("############")
+
+
+
+
 def main():
-  GetTimeline().getTraining("@urmumlol")
+  #GetTimeline().getTraining("@iamdevloper")
+  #generateRandUsers()
+  getALotofTweets()
 
 
 if __name__ == "__main__":
