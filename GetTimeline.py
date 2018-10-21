@@ -18,6 +18,12 @@ class GetTimeline(object):
     consumer_secret = 'i2bxYM53rVNv0NFnO4iALdUYUDXHSEp9JARjpSu6290B5W6BLj'
     access_token = '3265727682-sWioD71Vv1zJie1KCERyHZWgzCdDsGAy3lzdLJA'
     access_token_secret = 'Ir9vMlPyiJwafcqXOiRJgtdWpev2VU3rI0Z2MWXlJ79SV'
+    keywords = ["I need someone to talk to", "depressed", "wanna talk to someone", "want to talk to someone", "#depressed",
+                "#depression", "lonely", "alone", "sad", "i'm worthless", "falling apart", "disappointed in myself", "i'm the worst",
+                "i'm useless", "i am useless", "i'm a failure", "I am a failure", "too much pain", "unfair", "i'm not happy",
+                "i am not happy", "unhappy", "regret", "have no one", "I don't know what to do", "i'm lost", "i am lost", "i am so lost",
+                "hate me", "kill myself", "end myself", "end my life", "I want to die", "I want to commit suicide",
+                "i'm no good", "feel like shit", "i feel invisible"]
      # attempt authentication
     try:
       # create OAuthHandler object
@@ -42,6 +48,7 @@ class GetTimeline(object):
     xyz =  getTimeline(username)
     for y in xyz:
        print(y)
+
 
 
 def getTimeline(username):
