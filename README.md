@@ -1,5 +1,4 @@
-
-    
+![Heavy-Heart-Logo](https://github.com/coffincw/Heavy-Heart/blob/master/Heart%20Heavy%20logo.png)    
 # Heavy Heart
 <font color='red'>Heavy Heart</font> uses data collected on random users publicly posted tweets to  diagnose users with clinical depression. By using machine learning, Heavy Heart determines if a user should be recommended help based on the frequency and percentage of negative tweets compared to other tweets in the users feed.
 * * *
